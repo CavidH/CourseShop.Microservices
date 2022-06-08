@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FreeCourse.Service.Catalog.Dtos;
+using FreeCourse.Service.Catalog.Services;
 
 namespace FreeCourse.Service.Catalog
 {
@@ -38,6 +40,10 @@ namespace FreeCourse.Service.Catalog
             });
 
 
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICourseService, CourseService>();
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FreeCourse.Service.Catalog", Version = "v1" });
@@ -58,7 +64,10 @@ namespace FreeCourse.Service.Catalog
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
